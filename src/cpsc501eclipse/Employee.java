@@ -5,6 +5,12 @@ import java.util.Scanner;
 public class Employee {
 	private String username, realname, id;
 	private int type;
+	private static int ENTRY_LEVEL_MODIFIER = 1000;
+	private static int MID_LEVEL_MODIFIER = 500;
+	private static int HIGH_LEVEL_MODIFIER = 250;
+	private static String PASSWORD = "password123";
+	private static String SECURE_PASSWORD = "secretPassword";
+	private static String PIN = "123456";
 	
 	public int getType() {
 		return type;
@@ -46,10 +52,10 @@ public class Employee {
         {
         case 0:
         case 1:
-        	salary = id * 1000;
+        	salary = id * ENTRY_LEVEL_MODIFIER;
         	break;
         case 2:
-        	salary = id * 500;
+        	salary = id * MID_LEVEL_MODIFIER;
         	break;
         case 3:
         case 4:
@@ -69,7 +75,7 @@ public class Employee {
         case 18:
         case 19:
         case 20:
-        	salary = id * 250;
+        	salary = id * HIGH_LEVEL_MODIFIER;
         }
         
         return salary;
@@ -87,7 +93,7 @@ public class Employee {
         case 2:
         	System.out.print("Please enter the password: ");
         	String password = in.nextLine();
-        	if(password.compareTo("password123") != 0)
+        	if(password.compareTo(PASSWORD) != 0)
         	{
         		System.out.print("Sorry, please try again.");
         	}
@@ -116,7 +122,7 @@ public class Employee {
         case 20:
         	System.out.print("Please enter the password: ");
         	password = in.nextLine();
-        	if(password.compareTo("secretPassword") != 0)
+        	if(password.compareTo(SECURE_PASSWORD) != 0)
         	{
         		System.out.print("Sorry, please try again.");
         	}
@@ -124,7 +130,7 @@ public class Employee {
         	{
         		System.out.print("Please enter the pin: ");
 	        	password = in.nextLine();
-	        	if(password.compareTo("123456") != 0)
+	        	if(password.compareTo(PIN) != 0)
 	        	{
 	        		System.out.print("Sorry, please try again.");
 	        	}
