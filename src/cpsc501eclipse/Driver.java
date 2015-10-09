@@ -5,27 +5,49 @@ import java.util.*;
 public class Driver {
 	static Scanner in = new Scanner(System.in);
 	public static void main(String[] args) {
-
+		// Had to add these back in as temp variables to decide which type
+		// of employee to make
+		String username, realname, id;
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		boolean exit = false;
 		
 		
 		while(!exit){
-			Employee newGuy = new Employee();
+			Employee newGuy = null;
+			
 			
 	        System.out.print("Please enter user name : ");
-	        newGuy.setUsername(in.nextLine());
+	        username = in.nextLine();
 	        
 	        System.out.print("Please enter real name : ");
-	        newGuy.setRealname(in.nextLine());
+	        realname = in.nextLine();
 	        
 	        System.out.print("Please enter id# : ");
-	        newGuy.setId(in.nextLine());
+	        id = in.nextLine();
 	        
-	        int type = (int)Math.ceil((double)Integer.parseInt(newGuy.getId()) / 50.0);
-	        newGuy.setType(type);
+	        int type = (int)Math.ceil((double)Integer.parseInt(id) / 50.0);
+	        if(type <= Employee.ENTRY_LEVEL_ID_CAP)
+	        {
+	        	newGuy = new EntryLevelEmployee();
+	        }
+	        else if (type <= Employee.MID_LEVEL_ID_CAP)
+	        {
+	        	newGuy = new MidLevelEmployee();
+	        }
+	        else if (type <= Employee.HIGH_LEVEL_ID_CAP)
+	        {
+	        	newGuy = new HighLevelEmployee();
+	        	
+	        }
+	        else
+	        {
+	        	System.out.println("Invalid ID. Goodbye.");
+	        	return;
+	        }
+	        newGuy.setId(id);
+	        newGuy.setRealname(realname);
+	        newGuy.setUsername(username);       
 	        employees.add(newGuy);
-	        
 
 	        System.out.println("Congratulations " + newGuy.getRealname() + ", your salary is : $" + newGuy.getRealname());
 	        
@@ -51,7 +73,6 @@ public class Driver {
 	        		
 	        	if(loggingInEmployee != null)
 	        	{
-	        		type = loggingInEmployee.getType();
 	        		while(!authenticated){
 	        			authenticated = loggingInEmployee.authenticate(in);
 		        	}

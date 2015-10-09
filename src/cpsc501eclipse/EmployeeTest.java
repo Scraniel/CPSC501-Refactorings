@@ -11,78 +11,123 @@ import org.junit.Test;
 public class EmployeeTest {
 
 	@Test
-	public void testGetSalary() {
-		Employee tester = new Employee();
+	public void testGetSalaryEntryLevel() {
+		Employee tester = new EntryLevelEmployee();
 		
 		// Testing edge cases
-		tester.setType(0);
 		tester.setId("0");
 		assertEquals(0, tester.getSalary());
 		
-		tester.setType(20);
+		tester.setId("50");
+		assertEquals(50000, tester.getSalary());
+		
+		// Testing typical case
+		tester.setId("20");
+		assertEquals(20000, tester.getSalary());
+		
+		
+		// Testing fail cases
+		tester.setId("-1");
+		assertEquals(-1, tester.getSalary());
+		
+		tester.setId("51");
+		assertEquals(-1, tester.getSalary());
+		
+	}
+	
+	@Test
+	public void testGetSalaryMidLevel() {
+		Employee tester = new MidLevelEmployee();
+		
+		// Testing edge cases
+		tester.setId("51");
+		assertEquals(25500, tester.getSalary());
+		
+		tester.setId("100");
+		assertEquals(50000, tester.getSalary());
+		
+		// Testing typical case
+		tester.setId("75");
+		assertEquals(37500, tester.getSalary());
+		
+		
+		// Testing fail cases
+		tester.setId("-1");
+		assertEquals(-1, tester.getSalary());
+		
+		tester.setId("101");
+		assertEquals(-1, tester.getSalary());
+		
+	}
+	
+	@Test
+	public void testGetSalaryHighLevel() {
+		Employee tester = new HighLevelEmployee();
+		
+		// Testing edge cases
+		tester.setId("101");
+		assertEquals(25250, tester.getSalary());
+		
 		tester.setId("1000");
 		assertEquals(250000, tester.getSalary());
 		
-		
 		// Testing typical case
-		tester.setType(2);
-		tester.setId("60");
-		assertEquals(30000, tester.getSalary());
+		tester.setId("500");
+		assertEquals(125000, tester.getSalary());
+		
 		
 		// Testing fail cases
-		tester.setType(-1);
+		tester.setId("-1");
 		assertEquals(-1, tester.getSalary());
 		
-		tester.setType(21);
+		tester.setId("1001");
 		assertEquals(-1, tester.getSalary());
 		
 	}
 
 	@Test
-	public void testAuthenticate() {
-		Employee tester = new Employee();
+	public void testAuthenticateEntryLevel() {
+		Employee tester = new EntryLevelEmployee();
 		
-		// Testing edge cases
-		tester.setType(0);
-		String data = "";
+		// Only 1 case for entry level guys
 		assertTrue(tester.authenticate(new Scanner(System.in)));
-		
-		tester.setType(20);
-		data = "secretPassword\r\n123456\r\n";
-		setSystemIn(data);
-		assertTrue(tester.authenticate(new Scanner(System.in)));
-		
-		
+			
+		System.setIn(System.in);
+	}
+	
+	public void testAuthenticateMidLevel()
+	{
+		Employee tester = new MidLevelEmployee();
+
 		// Testing typical case
-		tester.setType(2);
-		data = "password123\r\n";
+		String data = "password123\r\n";
 		setSystemIn(data);
 		assertTrue(tester.authenticate(new Scanner(System.in)));
 		
-		// Testing fail cases
-		tester.setType(-1);
-		assertFalse(tester.authenticate(new Scanner(System.in)));
-		
-		tester.setType(21);
-		assertFalse(tester.authenticate(new Scanner(System.in)));
-		
-		//wrong passwords
-		tester.setType(2);
+		//wrong password
 		data = "password\r\n";
 		setSystemIn(data);
 		assertFalse(tester.authenticate(new Scanner(System.in)));
 		
-		tester.setType(20);
+		System.setIn(System.in);		
+	}
+	
+	public void testAuthenticationHighLevel()
+	{
+		Employee tester = new HighLevelEmployee();
+		
+		String data = "secretPassword\r\n123456\r\n";
+		setSystemIn(data);
+		assertTrue(tester.authenticate(new Scanner(System.in)));	
+
 		data = "secretPasswordf\r\n123456\r\n";
 		setSystemIn(data);
 		assertFalse(tester.authenticate(new Scanner(System.in)));
 		
-		// right passwrod, wrong pin
-		tester.setType(20);
+		// right password, wrong pin
 		data = "secretPassword\r\n1234567\r\n";
 		setSystemIn(data);
 		assertFalse(tester.authenticate(new Scanner(System.in)));
-		
 		
 		System.setIn(System.in);
 	}
