@@ -15,7 +15,7 @@ public class Driver {
 		while(!exit){
 			Employee newGuy = null;
 			
-			
+			// Get input from the user
 	        System.out.print("Please enter user name : ");
 	        username = in.nextLine();
 	        
@@ -25,16 +25,16 @@ public class Driver {
 	        System.out.print("Please enter id# : ");
 	        id = in.nextLine();
 	        
-	        int type = (int)Math.ceil((double)Integer.parseInt(id) / 50.0);
-	        if(type <= Employee.ENTRY_LEVEL_ID_CAP)
+	        // Decide which type of employee to create
+	        if(Integer.parseInt(id) <= Employee.ENTRY_LEVEL_ID_CAP)
 	        {
 	        	newGuy = new EntryLevelEmployee();
 	        }
-	        else if (type <= Employee.MID_LEVEL_ID_CAP)
+	        else if (Integer.parseInt(id) <= Employee.MID_LEVEL_ID_CAP)
 	        {
 	        	newGuy = new MidLevelEmployee();
 	        }
-	        else if (type <= Employee.HIGH_LEVEL_ID_CAP)
+	        else if (Integer.parseInt(id) <= Employee.HIGH_LEVEL_ID_CAP)
 	        {
 	        	newGuy = new HighLevelEmployee();
 	        	
@@ -44,16 +44,18 @@ public class Driver {
 	        	System.out.println("Invalid ID. Goodbye.");
 	        	return;
 	        }
+	        
+	        // Add the new employee to our cache
 	        newGuy.setId(id);
 	        newGuy.setRealname(realname);
 	        newGuy.setUsername(username);       
 	        employees.add(newGuy);
 
-	        System.out.println("Congratulations " + newGuy.getRealname() + ", your salary is : $" + newGuy.getRealname());
+	        System.out.println("Congratulations " + newGuy.getRealname() + ", your salary is : $" + newGuy.getSalary());
 	        
 	        System.out.println("Do you want to log in? (y/n) : ");
 	        String response = in.nextLine();
-	        
+	       
 	        if(response.compareToIgnoreCase("y") == 0)
 	        {
 	        	boolean authenticated = false;
@@ -71,6 +73,7 @@ public class Driver {
 	        		}
 	        	}
 	        		
+	        	// If the user wants to log in, make sure he / she authenticates
 	        	if(loggingInEmployee != null)
 	        	{
 	        		while(!authenticated){
