@@ -5,7 +5,7 @@ import java.util.*;
 public class Driver {
 	
 	public static void main(String[] args) {
-		String x, y, z;
+		String username, realname, id;
 		ArrayList<String> usernames = new ArrayList<String>();
 		ArrayList<String> realnames = new ArrayList<String>();
 		ArrayList<String> ids = new ArrayList<String>();
@@ -14,27 +14,27 @@ public class Driver {
 		while(!exit){
 			Scanner in = new Scanner(System.in);
 	        System.out.print("Please enter user name : ");
-	        x = in.nextLine();
-	        usernames.add(x);
+	        username = in.nextLine();
+	        usernames.add(username);
 	        
 	        System.out.print("Please enter real name : ");
-	        y = in.nextLine();   
-	        realnames.add(y);
+	        realname = in.nextLine();   
+	        realnames.add(realname);
 	        
 	        System.out.print("Please enter id# : ");
-	        z = in.nextLine();
-	        ids.add(z);
+	        id = in.nextLine();
+	        ids.add(id);
 	        
 	        int salary = 0;
-	        int type = (int)Math.ceil((double)Integer.parseInt(z)/50.0);
+	        int type = (int)Math.ceil((double)Integer.parseInt(id)/50.0);
 	        switch(type)
 	        {
 	        case 0:
 	        case 1:
-	        	salary = Integer.parseInt(z) * 1000;
+	        	salary = Integer.parseInt(id) * 1000;
 	        	break;
 	        case 2:
-	        	salary = Integer.parseInt(z) * 500;
+	        	salary = Integer.parseInt(id) * 500;
 	        	break;
 	        case 3:
 	        case 4:
@@ -54,10 +54,10 @@ public class Driver {
 	        case 18:
 	        case 19:
 	        case 20:
-	        	salary = Integer.parseInt(z) * 250;
+	        	salary = Integer.parseInt(id) * 250;
 	        }
 	        
-	        System.out.println("Congratulations " + y + ", your salary is : $" + salary);
+	        System.out.println("Congratulations " + realname + ", your salary is : $" + salary);
 	        
 	        System.out.println("Do you want to log in? (y/n) : ");
 	        String response = in.nextLine();
@@ -151,7 +151,4 @@ public class Driver {
         
         
 	}
-	
-	
-
 }
